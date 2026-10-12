@@ -9,7 +9,6 @@ import io
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="Warehouse Inventory Audit & Discrepancy Manager",
-    page_icon="📦",
     layout="wide",
 )
 
@@ -45,7 +44,7 @@ if "audit_logs" not in st.session_state:
 # -----------------------------------------------------------------------------
 # App Header & Navigation
 # -----------------------------------------------------------------------------
-st.title("📦 Warehouse Inventory Audit & Discrepancy Manager")
+st.title("Warehouse Inventory Audit & Discrepancy Manager")
 st.caption("SDF04 Project — Stock Audit Processing & Write-Off Authorization Engine")
 
 sidebar_role = st.sidebar.radio("Select Persona Role", ["Clerk: Stock Audit Upload", "Manager: Discrepancy Review", "System Dashboard & Inventory"])
@@ -69,7 +68,7 @@ st.sidebar.download_button(
 # Module 1: Clerk — Stock Audit Upload
 # -----------------------------------------------------------------------------
 if sidebar_role == "Clerk: Stock Audit Upload":
-    st.header("📋 Module 1: Inventory Clerk Audit Submission")
+    st.header("Module 1: Inventory Clerk Audit Submission")
     st.write("Upload physical count sheets from cycle counts or annual physical inventory verification.")
 
     col1, col2 = st.columns([2, 1])
@@ -125,14 +124,14 @@ if sidebar_role == "Clerk: Stock Audit Upload":
 # Module 2: Manager — Discrepancy Review & Write-Off Authorization
 # -----------------------------------------------------------------------------
 elif sidebar_role == "Manager: Discrepancy Review":
-    st.header("⚖️ Module 2: Manager Discrepancy Review & Write-off Panel")
+    st.header("Module 2: Manager Discrepancy Review & Write-off Panel")
     
     pending_audits = st.session_state.audit_logs[st.session_state.audit_logs["Status"] == "Pending Approval"]
 
     if pending_audits.empty:
-        st.success("🎉 No pending inventory discrepancies requiring authorization.")
+        st.success(" No pending inventory discrepancies requiring authorization.")
     else:
-        st.warning(f"⚠️ Found {len(pending_audits)} item discrepancy records pending authorization.")
+        st.warning(f"Found {len(pending_audits)} item discrepancy records pending authorization.")
 
         for idx, row in pending_audits.iterrows():
             with st.expander(f"Discrepancy ID: {row['Audit_ID']} | SKU: {row['SKU']} - {row['Item_Name']}", expanded=True):
@@ -170,7 +169,7 @@ elif sidebar_role == "Manager: Discrepancy Review":
 # Module 3: System Dashboard & Master Inventory
 # -----------------------------------------------------------------------------
 elif sidebar_role == "System Dashboard & Inventory":
-    st.header("📊 Module 3: Live System Inventory & Audit Logs")
+    st.header("Module 3: Live System Inventory & Audit Logs")
 
     tab1, tab2 = st.tabs(["Live Master Inventory", "Historical Audit Log & Reconciliation"])
 
